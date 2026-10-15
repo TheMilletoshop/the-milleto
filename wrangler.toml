@@ -1,0 +1,12 @@
+# Optional local Wrangler configuration. For Git-connected Pages,
+# also configure the D1 binding in the Cloudflare Pages dashboard.
+name = "the-milleto-india"
+compatibility_date = "2026-10-15"
+pages_build_output_dir = "."
+
+# After creating a D1 database, replace DATABASE_ID and use the same
+# binding name (DB) in Cloudflare Pages project settings.
+[[d1_databases]]
+binding = "DB"
+database_name = "milleto-india-orders"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
