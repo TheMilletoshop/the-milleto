@@ -1,18 +1,20 @@
-/* THE MILLETO India storefront.
-   Demo catalogue/prices and sample shipping. Confirm all values before launch. */
+/* THE MILLETO India storefront. Prices are INR per 200 g pack.
+   Keep these prices in sync with functions/api/create-payment.js. */
 const PRODUCTS = [
-  { id: "cranberry", name: "Cranberry Pistachio", price: 149, description: "A fruity little treat with a nutty crunch.", art: "Cranberry<br>& Pistachio", kicker: "A little tang, a little crunch", bg: "#ead5bd", colour: "#6c4736" },
-  { id: "chocolate", name: "Chocolate Millet Cookies", price: 129, description: "A chocolatey companion for your everyday cravings.", art: "Chocolate<br>Moments", kicker: "For the chocolate lover", bg: "#d9c2a9", colour: "#593d31" },
-  { id: "coconut", name: "Coconut Cookies", price: 119, description: "A familiar coconut note in a buttery bake.", art: "Coconut<br>& Comfort", kicker: "A taste of familiarity", bg: "#e7dfc9", colour: "#526344" },
-  { id: "cardamom", name: "Cashew Cardamom", price: 149, description: "Cashew richness with a hint of cardamom.", art: "Cashew<br>& Elaichi", kicker: "A fragrant favourite", bg: "#d7d9bd", colour: "#354c37" }
+  { id: "plain", name: "Plain Millet Cookies", price: 115, pack: "200 g pack", description: "A simple, buttery everyday favourite.", art: "Plain<br>& Simple", kicker: "The everyday classic", bg: "#ead8bf", colour: "#6c4736" },
+  { id: "coconut", name: "Coconut Millet Cookies", price: 115, pack: "200 g pack", description: "A familiar coconut note in a comforting bake.", art: "Coconut<br>& Comfort", kicker: "A taste of familiarity", bg: "#e7dfc9", colour: "#526344" },
+  { id: "chocolate", name: "Chocolate Millet Cookies", price: 115, pack: "200 g pack", description: "A chocolatey companion for your cravings.", art: "Chocolate<br>Moments", kicker: "For the chocolate lover", bg: "#d9c2a9", colour: "#593d31" },
+  { id: "jeera", name: "Jeera Millet Cookies", price: 120, pack: "200 g pack", description: "A savoury, aromatic twist for chai time.", art: "Jeera<br>& Chai", kicker: "A savoury favourite", bg: "#d7d9bd", colour: "#354c37" },
+  { id: "coffee", name: "Coffee Millet Cookies", price: 115, pack: "200 g pack", description: "A little coffee note for your snack break.", art: "Coffee<br>Break", kicker: "For coffee moments", bg: "#d9c8b8", colour: "#644331" },
+  { id: "dryfruit-elaichi", name: "Dryfruit Elaichi Millet Cookies", price: 185, pack: "200 g pack", description: "A rich dry-fruit blend with fragrant cardamom.", art: "Dryfruit<br>& Elaichi", kicker: "A fragrant favourite", bg: "#e5d0a5", colour: "#6a4c2d" }
 ];
-const SHIPPING_RUPEES = 80; // Must match SHIPPING_PAISE in create-payment.js.
+const SHIPPING_RUPEES = 80; // Sample flat rate; update this and server policy to match courier charges.
 const cart = Object.create(null);
 const money = n => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(n);
 
 function renderProducts() {
   const host = document.getElementById("products");
-  host.innerHTML = "";
+  host.replaceChildren();
   PRODUCTS.forEach(p => {
     const card = document.createElement("article");
     card.className = "product-card";
@@ -29,6 +31,9 @@ function renderProducts() {
     kicker.textContent = p.kicker;
     const title = document.createElement("h3");
     title.textContent = p.name;
+    const pack = document.createElement("p");
+    pack.className = "pack-size";
+    pack.textContent = p.pack;
     const desc = document.createElement("p");
     desc.className = "product-description";
     desc.textContent = p.description;
@@ -40,13 +45,13 @@ function renderProducts() {
     const add = document.createElement("button");
     add.type = "button";
     add.className = "add-button";
-    add.textContent = "Add +";
+    add.textContent = "Add to basket +";
     add.addEventListener("click", () => {
       cart[p.id] = Math.min(20, (cart[p.id] || 0) + 1);
       renderCart();
     });
     bottom.append(price, add);
-    card.append(art, kicker, title, desc, bottom);
+    card.append(art, kicker, title, pack, desc, bottom);
     host.appendChild(card);
   });
 }
@@ -76,7 +81,7 @@ function renderCart() {
       const name = document.createElement("strong");
       name.textContent = p.name;
       const sub = document.createElement("small");
-      sub.textContent = `₹${money(p.price)} each · ₹${money(p.price * cart[p.id])}`;
+      sub.textContent = `${p.pack} · ₹${money(p.price)} each · ₹${money(p.price * cart[p.id])}`;
       details.append(name, sub);
       const controls = document.createElement("div");
       controls.className = "qty-controls";
@@ -107,7 +112,6 @@ document.getElementById("order-form").addEventListener("submit", async event => 
     message.textContent = "Razorpay Checkout did not load. Check your connection and try again.";
     return;
   }
-
   const customer = {
     name: document.getElementById("customer-name").value.trim(),
     phone: document.getElementById("customer-phone").value.trim(),
@@ -116,22 +120,16 @@ document.getElementById("order-form").addEventListener("submit", async event => 
   };
   button.disabled = true;
   message.textContent = "Preparing secure checkout…";
-
   try {
     const response = await fetch("/api/create-payment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ customer, items })
     });
     const order = await response.json();
     if (!response.ok) throw new Error(order.error || "Could not start checkout.");
-
     const checkout = new Razorpay({
-      key: order.keyId,
-      amount: order.amount,
-      currency: order.currency,
-      name: "THE MILLETO",
-      description: "Millet bakes — India",
+      key: order.keyId, amount: order.amount, currency: order.currency,
+      name: "THE MILLETO", description: "Millet bakes — India",
       order_id: order.razorpayOrderId,
       prefill: { name: customer.name, contact: customer.phone },
       theme: { color: "#9f4937" },
@@ -139,8 +137,7 @@ document.getElementById("order-form").addEventListener("submit", async event => 
         message.textContent = "Verifying payment securely…";
         try {
           const res = await fetch("/api/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+            method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               internalOrderId: order.internalOrderId,
               razorpay_order_id: payment.razorpay_order_id,
@@ -155,8 +152,7 @@ document.getElementById("order-form").addEventListener("submit", async event => 
           }
           message.textContent = `Payment verified. Your order reference is ${order.internalOrderId}. Save it for your records.`;
           Object.keys(cart).forEach(id => delete cart[id]);
-          renderCart();
-          form.reset();
+          renderCart(); form.reset();
         } catch {
           message.textContent = `We could not confirm payment status. Save order reference ${order.internalOrderId} and contact support. Do not pay again until checked.`;
         } finally { button.disabled = false; }
