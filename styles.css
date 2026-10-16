@@ -1,7 +1,20 @@
 :root {
-  --cream:#f5ebdd; --paper:#fffaf2; --brown:#493426; --terracotta:#9f4937;
-  --green:#354c37; --saffron:#e7be69; --line:#dfcfbb; --muted:#796858;
-  --serif:"Cormorant Garamond", Georgia, serif; --sans:"DM Sans", Arial, sans-serif;
+  --cream: #FFF3D8;
+  --paper: #FFFBF2;
+  --brown: #50321F;
+  --terracotta: #B84432;
+  --green: #46512F;
+  --saffron: #F4CF62;
+  --line: #E7CBA8;
+  --muted: #79614C;
+
+  --orange: #E88735;
+  --field: #D9A044;
+  --rose: #C85C43;
+  --light-yellow: #FFF0B7;
+
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "DM Sans", Arial, sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:24px}
@@ -104,3 +117,229 @@ textarea{resize:vertical}
 @media(max-width:720px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-art{height:160px}}
 @media(max-width:620px){.site-header{padding:18px 5%;align-items:flex-start}.wordmark>span{font-size:24px}.wordmark small{font-size:7px;letter-spacing:1.2px}nav{gap:13px;font-size:10px;padding-top:5px}.hero{grid-template-columns:1fr;padding:52px 7% 35px;gap:30px}.hero-art{height:285px;width:min(100%,340px)}h1{font-size:66px}.ticker{gap:10px;font-size:8px}.section-wrap{padding:58px 6%}.story{grid-template-columns:1fr;gap:20px}.story-number{margin-top:12px}.story h2,.section-heading h2,.checkout-intro h2{font-size:48px}.section-heading{display:block}.section-heading>p{margin-top:15px}.product-grid{gap:10px}.product-card{padding:9px}.product-art{height:145px}.product-card h3{font-size:22px}.pack-size{font-size:10px;letter-spacing:.5px;font-weight:700;color:var(--green);margin:8px 0}
 .product-description{min-height:52px}.product-bottom{align-items:flex-start;flex-direction:column}.add-button{width:100%}.checkout-wrap{grid-template-columns:1fr;gap:25px}.checkout-intro{position:static}.checkout-card{padding:19px}.announcement{font-size:8px;letter-spacing:.7px}}
+/* ==========================================
+   THE MILLETO INDIA — HARVEST & BAKERY UPDATE
+   ========================================== */
+
+/* Hero: remove the second column and expand the text */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 470px;
+  padding: 76px 10% 82px;
+  background:
+    radial-gradient(
+      ellipse at 90% 15%,
+      rgba(244, 207, 98, 0.4),
+      transparent 35%
+    ),
+    linear-gradient(120deg, #FFF3D8 0%, #FFF8E9 70%, #FBE7C0 100%);
+}
+
+.hero-copy {
+  max-width: 760px;
+}
+
+.hero h1 {
+  max-width: 750px;
+  font-size: clamp(64px, 9vw, 112px);
+  line-height: 0.86;
+}
+
+.hero-intro {
+  max-width: 530px;
+  color: #624B37;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.hero-note {
+  color: #7D5B3C;
+}
+
+/* A little more warmth in the hero heading */
+.hero h1 em {
+  color: var(--terracotta);
+}
+
+/* Buttons */
+.button {
+  background: var(--terracotta);
+  border-radius: 3px;
+  box-shadow: 0 4px 0 rgba(80, 50, 31, 0.08);
+}
+
+.button:hover {
+  background: var(--brown);
+}
+
+/* Brand ticker */
+.ticker {
+  background: var(--terracotta);
+  color: #FFF8E8;
+}
+
+.ticker b {
+  color: var(--saffron);
+}
+
+/* New millet harvest strip */
+.harvest-band {
+  overflow: hidden;
+  background: #F8E4B8;
+  border-bottom: 1px solid #E6C58D;
+  padding: 24px 9%;
+}
+
+.harvest-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 30px;
+}
+
+.harvest-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.harvest-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.7;
+  color: var(--terracotta);
+}
+
+.harvest-copy p {
+  font: 600 clamp(30px, 4vw, 46px)/0.98 var(--serif);
+  color: var(--brown);
+  margin: 12px 0;
+}
+
+.harvest-copy em {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+.harvest-illustration {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  justify-self: end;
+  height: auto;
+}
+
+/* Story: subtle warm background and stronger quote */
+.story {
+  position: relative;
+  background: var(--paper);
+}
+
+.pull-quote {
+  color: var(--terracotta);
+}
+
+/* Shop: brighter but still easy to read */
+.shop {
+  background:
+    radial-gradient(
+      circle at 95% 5%,
+      rgba(232, 135, 53, 0.11),
+      transparent 26%
+    ),
+    #F7E7CE;
+}
+
+.section-heading h2 {
+  color: var(--brown);
+}
+
+.product-card {
+  background: #FFFCF5;
+  border-color: #E5CBA9;
+  border-radius: 3px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--orange);
+}
+
+.product-art {
+  background: var(--art-bg, #F5DFAF);
+  color: var(--green);
+}
+
+.product-kicker {
+  color: var(--terracotta);
+}
+
+.add-button {
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.add-button:hover {
+  background: var(--terracotta);
+  color: white;
+}
+
+/* Brand quote band */
+.quote-band {
+  background: var(--green);
+}
+
+.quote-mark,
+.quote-band em {
+  color: var(--saffron);
+}
+
+/* Basket and form details */
+.checkout-card {
+  border-color: var(--line);
+}
+
+input:focus,
+textarea:focus {
+  outline-color: var(--orange);
+}
+
+/* Mobile layout */
+@media (max-width: 620px) {
+  .hero {
+    min-height: auto;
+    padding: 56px 7% 48px;
+  }
+
+  .hero h1 {
+    font-size: clamp(58px, 15vw, 78px);
+    line-height: 0.88;
+  }
+
+  .hero-intro {
+    font-size: 13px;
+  }
+
+  .harvest-band {
+    padding: 28px 7% 12px;
+  }
+
+  .harvest-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .harvest-copy p {
+    font-size: 36px;
+  }
+
+  .harvest-illustration {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+}
