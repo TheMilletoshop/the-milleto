@@ -12,9 +12,8 @@
   --field: #D9A044;
   --rose: #C85C43;
   --light-yellow: #FFF0B7;
-
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "DM Sans", Arial, sans-serif;
+ --serif: "Yeseva One", Georgia, serif;
+--sans: "DM Sans", Arial, sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:24px}
@@ -401,4 +400,63 @@ textarea:focus {
     font-size: 6px;
     letter-spacing: 0.7px;
   }
+}
+
+/* THE MILLETO — distinctive Indian-inspired typography */
+
+/* Main homepage headline */
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  line-height: 0.98;
+}
+
+/* Main section headings */
+h2,
+.story h2,
+.section-heading h2,
+.checkout-intro h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1.02;
+}
+
+/* Large brand quote */
+.quote-band p {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+/* Smaller pull quotes and harvest text */
+.pull-quote,
+.harvest-copy p,
+.site-footer > p {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+/* Product names */
+.product-card h3,
+.checkout-card h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+/* Keep the brand wordmark refined */
+.wordmark-text > span,
+.wordmark > span,
+.footer-wordmark > span {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+/* Preserve clean readability for supporting text */
+body,
+button,
+input,
+textarea {
+  font-family: var(--sans);
 }
