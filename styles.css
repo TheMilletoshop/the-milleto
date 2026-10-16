@@ -460,3 +460,20 @@ input,
 textarea {
   font-family: var(--sans);
 }
+
+.site-header .wordmark-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.site-header .wordmark-text > span {
+  line-height: 1.05;
+}
+
+.site-header .wordmark-text small {
+  font-size: 10px;
+  letter-spacing: 2px;
+  line-height: 1.4;
+}
