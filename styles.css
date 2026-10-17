@@ -355,7 +355,8 @@ textarea:focus {
 .brand-logo {
   width: 56px;
   height: 56px;
-  object-fit: contain;
+  object-fit: cover;
+  background: transparent;
   display: block;
 }
 
