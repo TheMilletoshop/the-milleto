@@ -357,7 +357,7 @@ textarea:focus {
   height: 56px;
   object-fit: cover;
   background: transparent;
-  display: block;
+  display: circle;
 }
 
 .wordmark-text {
